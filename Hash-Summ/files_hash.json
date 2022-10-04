@@ -15,11 +15,11 @@
     },
     {
       "file": "C:/Users/krisF/Documents/GitHub/InfSec/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\New\\file1.txt",
-      "hash": [ false, false, false, true, true, true, false, false, false, false, true, true, false, true, true, false ]
+      "hash": [ false, false, true, true, false, false, true, false, false, false, false, true, true, true, false, false ]
     },
     {
       "file": "C:/Users/krisF/Documents/GitHub/InfSec/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\New\\New1\\new2.txt",
-      "hash": []
+      "hash": [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ]
     }
   ]
 }

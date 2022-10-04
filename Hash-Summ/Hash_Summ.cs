@@ -45,7 +45,8 @@ namespace Hash_Summ
                             hashsum = bits;
                         }
                     }
-                    if (bitArray.Length % 16 != 0)
+                    //add 0 values if less then 16 bits and if empty file
+                    if (bitArray.Length % 16 != 0 || bitArray.Length == 0)
                     {
                         BitArray bits = new BitArray(16);
                         int i = 0;
@@ -58,7 +59,8 @@ namespace Hash_Summ
                         {
                             bits[k] = false;
                         }
-                        if (hashsum.Count != 0)
+
+                        if (hashsum != null && hashsum.Count != 0)
                         {
                             hashsum.Xor(bits);
                         }
