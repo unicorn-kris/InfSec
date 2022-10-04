@@ -11,11 +11,11 @@ namespace Hash_Summ
         {
             FilesHash result = new FilesHash();
             string path = string.Empty;
-            using (StreamReader sr = new StreamReader("C:/Users/User/source/repos/Hash-Summ/Hash-Summ/path.txt"))
+            using (StreamReader sr = new StreamReader("C:/Users/krisF/Documents/GitHub/InfSec/Hash-Summ/path.txt"))
             {
                 path = sr.ReadToEnd();
             }
-                string[] allfiles = Directory.GetFiles(path);
+            List<string> allfiles = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories).ToList();
 
             foreach (string file in allfiles)
             {
@@ -78,29 +78,34 @@ namespace Hash_Summ
                 }
 
 
-                 result = new FilesHash() { FileHash = filesHash.ToList(), Path = path };
-                string jsonString = JsonSerializer.Serialize(result);
 
-                var files = new StreamReader("C:/Users/User/source/repos/Hash-Summ/Hash-Summ/files_hash.json").ReadToEnd();
+            }
+            result = new FilesHash() { FileHash = filesHash.ToList(), Path = path };
+            string jsonString = JsonSerializer.Serialize(result);
+            FilesHash files = null;
 
-                if (files is null)
+            using (StreamReader str = new StreamReader("C:/Users/krisF/Documents/GitHub/InfSec/Hash-Summ/files_hash.json"))
+            {
+                if (!String.IsNullOrEmpty(str.ReadToEnd()))
                 {
-                    using (StreamWriter sr = new StreamWriter("C:/Users/User/source/repos/Hash-Summ/Hash-Summ/files_hash.json"))
-                    {
-                        sr.WriteLine(jsonString);
-                    }
+                    return result;
                 }
             }
-                return result;
-            
+            using (StreamWriter sr = new StreamWriter("C:/Users/krisF/Documents/GitHub/InfSec/Hash-Summ/files_hash.json"))
+            {
+                sr.WriteLine(jsonString);
+            }
+            return result;
+
         }
 
         public bool CheckFilesHash(FilesHash fileHash)
         {
-            var str = new StreamReader("C:/Users/User/source/repos/Hash-Summ/Hash-Summ/files_hash.json").ReadToEnd();
+            var str = new StreamReader("C:/Users/krisF/Documents/GitHub/InfSec/Hash-Summ/files_hash.json").ReadToEnd();
             FilesHash files = JsonSerializer.Deserialize<FilesHash>(str);
 
             var errors = 0;
+
             if (files.Path != null)
             {
                 if (fileHash.Path.Equals(files.Path))
@@ -112,18 +117,18 @@ namespace Hash_Summ
                             Console.WriteLine($"add new file {file.file}");
                             errors++;
                         }
-                        else 
+                        else
                         {
                             int count = 0;
                             var hash = files.FileHash.Where(f => f.file.Equals(file.file)).First().hash;
                             for (int i = 0; i < hash.Count; i++)
                             {
-                                if (file.hash[i] != hash[i]) 
+                                if (file.hash[i] != hash[i])
                                     count++;
                             }
                             if (count > 0)
                             {
-                                Console.WriteLine($"change the file {file.file}");
+                                Console.WriteLine($"change the file {file.file} in path {files.Path}");
                                 errors++;
                             }
                         }
@@ -132,17 +137,18 @@ namespace Hash_Summ
                     {
                         if (!fileHash.FileHash.Select(fh => fh.file).Contains(file.file))
                         {
-                            Console.WriteLine($"delete the file {file.file}");
+                            Console.WriteLine($"delete the file {file.file} in path {files.Path}");
                             errors++;
                         }
                     }
                 }
             }
+
             if (errors > 0)
             {
                 return false;
             }
-            return true;    
+            return true;
         }
     }
 }
