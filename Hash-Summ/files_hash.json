@@ -1,29 +1,25 @@
 {
-  "Path": "C:/Users/User/Desktop/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430 (2)",
+  "Path": "C:/Users/krisF/Documents/GitHub/InfSec/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430",
   "FileHash": [
     {
-      "file": "C:/Users/User/Desktop/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430 (2)\\all.sql",
-      "hash": [ true, true, false, false, true, true, true, false, false, false, false, true, false, false, false, false ]
+      "file": "C:/Users/krisF/Documents/GitHub/InfSec/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\debg.log",
+      "hash": [ true, false, true, false, false, false, false, true, true, false, true, false, false, false, false, false ]
     },
     {
-      "file": "C:/Users/User/Desktop/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430 (2)\\dcr and rko.sql",
-      "hash": [ true, true, false, false, true, false, true, false, true, true, true, true, false, true, false, false ]
+      "file": "C:/Users/krisF/Documents/GitHub/InfSec/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\dkdkdk.txt",
+      "hash": [ false, true, true, false, false, true, true, false, true, false, true, true, false, false, false, false ]
     },
     {
-      "file": "C:/Users/User/Desktop/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430 (2)\\inner.sql",
-      "hash": [ false, true, true, true, true, false, false, false, true, false, true, false, false, false, true, false ]
+      "file": "C:/Users/krisF/Documents/GitHub/InfSec/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\Lection.docx",
+      "hash": [ true, true, true, true, true, false, false, true, true, true, false, false, true, true, false, true ]
     },
     {
-      "file": "C:/Users/User/Desktop/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430 (2)\\left.sql",
-      "hash": [ true, false, false, false, false, false, false, false, false, true, false, true, true, false, true, false ]
+      "file": "C:/Users/krisF/Documents/GitHub/InfSec/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\New\\file1.txt",
+      "hash": [ false, false, true, true, false, false, true, false, false, false, false, true, true, true, false, false ]
     },
     {
-      "file": "C:/Users/User/Desktop/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430 (2)\\rko.sql",
-      "hash": [ false, false, false, true, true, true, false, false, false, true, false, true, false, false, false, false ]
-    },
-    {
-      "file": "C:/Users/User/Desktop/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430 (2)\\\u0437\u0430\u043F\u0440\u043E\u0441\u044B \u0434\u043B\u044F \u043F\u043E\u0438\u0441\u043A\u0430 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u043E\u0432 \u042E\u0414\u041A.rar",
-      "hash": [ false, false, false, true, true, true, false, true, false, true, true, true, false, true, true, false ]
+      "file": "C:/Users/krisF/Documents/GitHub/InfSec/\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\New\\New1\\new2.txt",
+      "hash": [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ]
     }
   ]
 }
