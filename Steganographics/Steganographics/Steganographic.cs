@@ -32,8 +32,9 @@ namespace Steganographics
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             Encoding win1251 = Encoding.GetEncoding("Windows-1251");
 
+            var str = win1251.GetBytes(key.ToString());
             //bytes of encrypt word
-            BitArray p = new BitArray(win1251.GetBytes(key.ToString()));
+            BitArray p = new BitArray(str);
 
             //text
             string input = "";
@@ -85,7 +86,7 @@ namespace Steganographics
             using (StreamWriter sw = new StreamWriter(pathOutput))
             {
                 sw.WriteLine(result);
-                Console.WriteLine(result);
+                //Console.WriteLine(result);
             }
 
             using (StreamWriter sw = new StreamWriter(fileName))
@@ -93,7 +94,7 @@ namespace Steganographics
                 foreach (var b in bytes)
                 {
                     sw.Write(b);
-                    Console.WriteLine(b);
+                    //Console.WriteLine(b);
                 }
             }
         }
@@ -155,10 +156,21 @@ namespace Steganographics
 
             foreach (var l in list)
             {
+                int stepof2 = 1;
+                int summ = 0;
                 if (l.Contains(1))
                 {
                     //перевод из 8-битного в байты
-                    result += win1251.GetChars(l.ToArray())[0];
+                    for (int i = 0; i <= 7; i++)
+                    {
+                        summ += l[i] * stepof2;
+                        stepof2 *= 2;
+                    }
+                    byte[] b = new byte[1];
+                    b[0] = (byte)summ;
+                    result += win1251.GetChars(b)[0];
+                    stepof2 = 1;
+                    summ = 0;
                 }
                 
             }

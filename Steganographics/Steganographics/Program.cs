@@ -11,10 +11,10 @@ namespace Steganographics
             Console.WriteLine("Enter encrypting word");
             string key = Console.ReadLine();
 
-            string inputPath = "C:/Users/krisF/Documents/GitHub/InfSec/Steganographics/Steganographics/input.txt";
-            string outputPath = "C:/Users/krisF/Documents/GitHub/InfSec/Steganographics/Steganographics/output.txt";
-            string file = "C:/Users/krisF/Documents/GitHub/InfSec/Steganographics/Steganographics/file.txt";
-            string result = "C:/Users/krisF/Documents/GitHub/InfSec/Steganographics/Steganographics/result.txt";
+            string inputPath = "C:/Users/User/Documents/GitHub/InfSec/Steganographics/Steganographics/input.txt";
+            string outputPath = "C:/Users/User/Documents/GitHub/InfSec/Steganographics/Steganographics/output.txt";
+            string file = "C:/Users/User/Documents/GitHub/InfSec/Steganographics/Steganographics/file.txt";
+            string result = "C:/Users/User/Documents/GitHub/InfSec/Steganographics/Steganographics/result.txt";
 
             Console.WriteLine("enter 1 for encrypt, 2 for decrypt, 3 for finish");
 
