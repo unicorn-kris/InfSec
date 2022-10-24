@@ -1,3 +1,5 @@
 Docs
-\do\Новый текстовый документ.txt
-ТМњ
+\doc1.txt
+LNbOЯМОв
+\doc2\doc3.txt
+2MaNфМаНПг

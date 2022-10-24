@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Text;
 
 
 namespace Steganographics
@@ -32,7 +33,7 @@ namespace Steganographics
             Encoding win1251 = Encoding.GetEncoding("Windows-1251");
 
             //bytes of encrypt word
-            byte[] p = win1251.GetBytes(key.ToString());
+            BitArray p = new BitArray(win1251.GetBytes(key.ToString()));
 
             //text
             string input = "";
@@ -57,16 +58,17 @@ namespace Steganographics
                 {
                     if (p_index < p.Length)
                     {
-                        if (p[p_index] == 1)
+                        if (p[p_index])
                         {
                             result += dict[symbol];
+                            bytes.Add(1);
                         }
                         else
                         {
                             result += symbol;
+                            bytes.Add(0);
                         }
                         p_index++;
-                        bytes.Add(p[p_index]);
                     }
                     else
                     {
@@ -88,11 +90,83 @@ namespace Steganographics
 
             using (StreamWriter sw = new StreamWriter(fileName))
             {
-                foreach(var b in bytes)
+                foreach (var b in bytes)
                 {
                     sw.Write(b);
                     Console.WriteLine(b);
                 }
+            }
+        }
+
+        public void Decrypt(string pathInput, string resultfile)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            Encoding win1251 = Encoding.GetEncoding("Windows-1251");
+
+            //text
+            string input = "";
+
+            using (StreamReader sr = new StreamReader(pathInput))
+            {
+                input = sr.ReadToEnd();
+            }
+
+            //decrypt result text
+            string result = "";
+
+            //decrypt container
+            List<byte> bytes = new List<byte>();
+
+            //decrypt text and fill bytes array
+            foreach (char symbol in input)
+            {
+                foreach (var d in dict)
+                {
+                    if (symbol == d.Value)
+                    {
+                        bytes.Add(1);
+                    }
+                    else if (symbol == d.Key)
+                    {
+                        bytes.Add(0);
+                    }
+                }
+            }
+
+            //list of list[8] array for decrypt word
+
+            List<List<byte>> list = new List<List<byte>>();
+
+            int byte_index = 0;
+
+            List<byte> list_in = new List<byte>();
+
+            foreach (byte b in bytes)
+            {
+                list_in.Add(b);
+
+                if (byte_index % 8 == 7)
+                {
+                    list.Add(list_in);
+                    list_in = new List<byte>();
+                }
+                byte_index++;
+            }
+
+            foreach (var l in list)
+            {
+                if (l.Contains(1))
+                {
+                    //перевод из 8-битного в байты
+                    result += win1251.GetChars(l.ToArray())[0];
+                }
+                
+            }
+
+            using (StreamWriter sw = new StreamWriter(resultfile))
+            {
+                Console.WriteLine(result);
+                sw.WriteLine(result);
             }
 
             //Directory.Delete(pathInput, true);
@@ -104,86 +178,6 @@ namespace Steganographics
             //        Console.Write(k + " ");
             //    Console.WriteLine();
             //}
-        }
-
-        public void Decrypt(string pathInput, string fileName)
-        {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            Encoding win1251 = Encoding.GetEncoding("Windows-1251");
-
-            ////bytes of encrypt word
-            //byte[] p = win1251.GetBytes(key.ToString());
-
-            ////text
-            //string input = "";
-
-            //using (StreamReader sr = new StreamReader(pathInput))
-            //{
-            //    input = sr.ReadToEnd();
-            //}
-
-            ////encrypt text
-            //string result = "";
-
-            ////encrypt container
-            //List<byte> bytes = new List<byte>();
-
-            //int p_index = 0;
-
-            ////encrypt text and fill container
-            //foreach (char symbol in input)
-            //{
-            //    if (dict.ContainsKey(symbol))
-            //    {
-            //        if (p_index < p.Length)
-            //        {
-            //            if (p[p_index] == 1)
-            //            {
-            //                result += dict[symbol];
-            //            }
-            //            else
-            //            {
-            //                result += symbol;
-            //            }
-            //            p_index++;
-            //            bytes.Add(p[p_index]);
-            //        }
-            //        else
-            //        {
-            //            result += symbol;
-            //            bytes.Add(0);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        result += symbol;
-            //    }
-            //}
-
-            //using (StreamWriter sw = new StreamWriter(pathOutput))
-            //{
-            //    sw.WriteLine(result);
-            //    Console.WriteLine(result);
-            //}
-
-            //using (StreamWriter sw = new StreamWriter(fileName))
-            //{
-            //    foreach (var b in bytes)
-            //    {
-            //        sw.Write(b);
-            //        Console.WriteLine(b);
-            //    }
-            //}
-
-            ////Directory.Delete(pathInput, true);
-
-            ////foreach (var item in map)
-            ////{
-            ////    Console.WriteLine(item.Key);
-            ////    foreach(var k in item.Value)
-            ////        Console.Write(k + " ");
-            ////    Console.WriteLine();
-            ////}
         }
     }
 }

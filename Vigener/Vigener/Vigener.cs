@@ -59,7 +59,7 @@ namespace Vigener
 
                 }
             }
-            //Directory.Delete(pathInput, true);
+            Directory.Delete(pathInput, true);
 
             //foreach (var item in map)
             //{
@@ -113,9 +113,11 @@ namespace Vigener
 
                 List<string> dir = item.Key.Split('\\').ToList();
 
+                dir.RemoveAll(x => string.IsNullOrEmpty(x));
+
                 if (dir.Count == 1)
                 {
-                    using (FileStream fs = File.Create(di + "\\" + dir[0]))
+                    using (FileStream fs = File.Create(di + "\\" + dir[0].Replace('\r', ' ')))
                     { }
                     if (!string.IsNullOrEmpty(item.Key.Replace('\r', ' ')))
                     {
